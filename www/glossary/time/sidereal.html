@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="shortcut icon" href="../../assets/ico/favicon.ico">-->
+
+    <title>Star Rise App</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../css/defaultTheme.css" rel="stylesheet">
+<!--	<link href="css/bootstrap-theme.min.css" rel="stylesheet">-->
+	  
+	  <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="../../js/jquery-2.1.0.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+	<script src="../../js/starUtils.js"></script>
+  </head>
+
+  <body onload="updateClocks(); setInterval('updateClocks()', 1000)">
+    <div class="container">
+
+      <!-- Jumbotron -->
+	  <div class="spacer">
+		  <p>
+			  <a class="btn btn-lg btn-success" onclick="history.go(-1);" role="button">Go back</a>
+			  <a class="btn btn-lg btn-success nightButton" role="button" onclick="toggleNightmode(false)" id="nightButton">Night mode</a>
+			  <a class="btn btn-lg btn-success dayButton" role="button" onclick="toggleNightmode(true)" id="dayButton">Day mode</a>
+		  </p>
+	  </div>
+      <div class="jumbotron">
+        <h1>Sidereal time: </h1>
+		  <span class="h2" id="siderealClock">&nbsp;</span> 
+      </div>
+		
+		<p><i>Sidereal time</i> is a time scale based on the Earth's rotation relative to the stars.  One sidereal day is equivalent to the time elapsed between two consecutive points in time where a star is on an observer's local meridian.  A sidereal day is 99.726958% of the length of a solar day, or 3 minutes and 56 seconds shorter.  A star's right ascension and declination are used in conjunction with local sidereal time to determine a star's position in the sky.  </p>
+		<br>
+		<img src="siderealImg.png" alt="Sidereal Time Infographic" width="100%" height="100%">
+		<br><br>
+		<p>"<a href="https://en.wikipedia.org/wiki/File:Sidereal_Time_en.PNG#mediaviewer/File:Sidereal_Time_en.PNG">Sidereal Time en</a>" by Francisco Javier Blanco González - May 29, 2009. Via <a href="//en.wikipedia.org/wiki/">Wikipedia</a>.</p>
+		
+		<br>
+		
+		<p>This image shows the difference between a solar day and a sidereal day.  Note the angles marked in orange are both equivalent to approximately 360/365 degrees, as the Earth rotates that far around the Sun in one day. As you can see in the image, after one sidereal day the distant star is in the same relative location and after one solar day the sun is in the same relative locaiton.  The local sidereal time for any given location in any point in time will gain 4 minutes for every 24 hours of local time until one year has passed and one additional sidereal day has passed.</p>
+		
+      <!-- Site footer -->
+      <div class="footer">
+        <p>&copy; Ian Palmer, 2014</p>
+      </div>
+
+    </div> <!-- /container -->
+  </body>
+	<script type="text/javascript" src="../../js/starCalc.js"></script>
+	
+	<script type="text/javascript">
+		function updateClocks() {			
+			var localSidrealTimeString = stringifyDecimalTime(getLocalSiderealTime(getJulianDate(true), -97.707));
+			
+			document.getElementById("siderealClock").firstChild.nodeValue = localSidrealTimeString;
+		}
+	</script>
+</html>

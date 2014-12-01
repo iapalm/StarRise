@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, width=device-width, user-scalable=true">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="shortcut icon" href="../../assets/ico/favicon.ico">-->
+
+    <title>Star Rise App</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/defaultTheme.css" rel="stylesheet">
+    <link href="css/moonInfo.css" rel="stylesheet">
+<!--	  <link href="css/bootstrap-theme.min.css" rel="stylesheet">-->
+	  
+	  <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script src="js/starCalc.js"></script>
+	<script src="js/starUtils.js"></script>
+  </head>
+
+  <body onload="updateInfo()">
+    <div class="container">
+      <!-- Jumbotron -->
+	  <div class="spacer">
+		  <p>
+			  <a class="btn btn-lg btn-success" onclick="history.go(-1);" role="button">Go back</a>
+			  <a class="btn btn-lg btn-success nightButton" role="button" onclick="toggleNightmode(false)" id="nightButton">Night mode</a>
+			  <a class="btn btn-lg btn-success dayButton" role="button" onclick="toggleNightmode(true)" id="dayButton">Day mode</a>
+		  </p>
+	  </div>
+      <div class="jumbotron">
+        <h1>The Moon</h1>
+			<label>
+				<input type="checkbox" id="overlayDarkness"> Overlay darkness
+			</label>
+			<br>
+			<label>
+				<input type="checkbox" id="overlaySeas"> Overlay seas
+			</label>
+			<br>
+			<label>
+				<input type="checkbox" id="overlayCraters"> Overlay craters
+			</label>
+			<br>
+			<a class="btn btn-small btn-primary" href="moonDetail.html" role="button">Expand</a>
+			<br>
+			<br>
+			<div class="imgWrapper">
+				<img src="img/moon_map.jpg" class="overlay" alt="Moon map" id="imgMoon">
+				<img src="img/moon_d_full.png" class="overlay" alt="Moon darkness" id="imgDarkness">
+				<img src="img/moon_sealabels.png" class="overlay" alt="Moon labels" id="imgSeas">
+				<img src="img/moon_craterlabels.png" class="overlay" alt="Moon labels" id="imgCraters">
+			</div>
+        </div>
+      </div>
+
+      <!-- Site footer -->
+      <div class="footer">
+        <p>&copy; Ian Palmer, 2014</p>
+      </div>
+
+    </div> <!-- /container -->	  
+	  <script type="text/javascript">
+		function updateInfo() {
+			var phaseInfo;
+			
+			console.log(getMoonPercent());
+			var perMoon = getMoonPercent();
+			perMoon = (perMoon > .5) ? (1 - perMoon) + .5 : perMoon + .5;
+			phaseInfo = (perMoon * 100).toPrecision(3).toString();
+			phaseInfo += "% full<br>";
+			
+			phaseInfo += getMoonPhase();
+			
+			$('#phase').html(phaseInfo);
+			$('#imgDarkness').attr('src', "img/" + getImageFromPhase() + ".png");
+		}
+		  
+		$('#overlaySeas').prop('checked', true);
+		$('#overlayCraters').prop('checked', true);
+		$('#overlayDarkness').prop('checked', true);
+		  
+		$('#overlaySeas').change(function () {
+			if ($('#overlaySeas').is(":checked")) {
+				$('#imgSeas').show();
+			} else {
+				$('#imgSeas').hide();
+			}
+		});
+		  
+		$('#overlayCraters').change(function () {
+			if ($('#overlayCraters').is(":checked")) {
+				$('#imgCraters').show();
+			} else {
+				$('#imgCraters').hide();
+			}
+		});
+		  
+		$('#overlayDarkness').change(function () {
+			if ($('#overlayDarkness').is(":checked")) {
+				$('#imgDarkness').attr('src', "img/" + getImageFromPhase() + ".png");
+				$('#imgDarkness').show();
+			} else {
+				$('#imgDarkness').hide();
+			}
+		});
+	</script>
+  </body>
+</html>
