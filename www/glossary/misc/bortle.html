@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="shortcut icon" href="../../assets/ico/favicon.ico">-->
+
+    <title>Star Rise App</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../css/defaultTheme.css" rel="stylesheet">
+<!--	<link href="css/bootstrap-theme.min.css" rel="stylesheet">-->
+	  
+	  <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="../../js/jquery-2.1.0.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+	<script src="../../js/starUtils.js"></script>	
+  </head>
+
+  <body>
+    <div class="container">
+
+      <!-- Jumbotron -->
+	  <div class="spacer">
+		  <p>
+			  <a class="btn btn-lg btn-success" onclick="history.go(-1);" role="button">Go back</a>
+			  <a class="btn btn-lg btn-success nightButton" role="button" onclick="toggleNightmode(false, 2)" id="nightButton">Night mode</a>
+			  <a class="btn btn-lg btn-success dayButton" role="button" onclick="toggleNightmode(true, 2)" id="dayButton">Day mode</a>
+		  </p>
+	  </div>
+      <div class="jumbotron">
+        <h1>Bortle scale</h1> 
+      </div>
+		
+		<p>The Bortle scale measures the degree to which the night sky in an area is affected by light pollution.  Higher values on the Bortle scale correlate to brighter night skies and worse astronomical conditons.  The scale was created in 2001 by John E. Bortle to help astronomers determine the darkness of an observing point.  Use the table below to determine your area's Bortle rating, with 1 being the darkest night skies on Earth and 9 being the brightest night skies.</p>
+		<br>
+		
+		<table class="table table-striped">
+			<tr>
+				<td>Bortle rating</td>
+				<td>Description</td>
+				<td>Naked Eye Limiting Magnitude (NELM)</td>
+				<td>Visibility</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>Darkest night sky - no apparent light pollution</td>
+				<td>7.5 - 8.0</td>
+				<td>
+					<li>Many Messier objects and globular clusters are visible to the naked eye and appear as fuzzy stars</li>
+					<li>The gegenschien is visible</li>
+					<li>Zodiacal light is visible and colorful</li>
+					<li>Zodiacal band is visible</li>
+					<li>Portions of the Milky Way cast shadows</li>
+					<li>M33 (Triangulum galaxy) is visible to the naked eye</li>
+				</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>Very dark area</td>
+				<td>7.0 - 7.5</td>
+				<td>
+					<li>Many Messier objects and globular clusters are visible to the naked eye and appear as fuzzy stars</li>
+					<li>The gegenschien is visible</li>
+					<li>Zodiacal light is distinct and cast shadows at sunset/sunrise</li>
+					<li>Clouds are visible only as dark spots in the sky</li>
+					<li>Portions of the Milky Way cast shadows</li>
+					<li>M33 (Triangulum galaxy) is visible to the naked eye</li>
+				</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>Typical rural area</td>
+				<td>6.5 - 7.0</td>
+				<td>
+					<li>Many Messier objects and globular clusters are visible to the naked eye and appear as fuzzy stars</li>
+					<li>Zodiacal light is visible and color is visible</li>
+					<li>Light pollution apparent on horizon</li>
+					<li>Clouds are lit only on horizon</li>
+					<li>Milky way strikingly visible</li>
+					<li>M33 (Triangulum galaxy) is visible to the naked eye</li>
+				</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>Semi-rural area</td>
+				<td>6.0-6.5</td>
+				<td>
+					<li>Brighter Messier objects and globular clusters may still be visible</li>
+					<li>Zodiacal light somewhat visible, but does not extend to zenith at sunset/sunrise</li>
+					<li>Light pollution apparent on horizon in several directions</li>
+					<li>Clouds are lit on horizon</li>
+					<li>Milky way visible</li>
+					<li>M33 (Triangulum galaxy) is visible only with averted vision and when high in the sky</li>
+				</td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>Suburban area</td>
+				<td>5.5-6.0</td>
+				<td>
+					<li>Very bright Messier objects and globular clusters may still be visible</li>
+					<li>Zodiacal light mostly invisible</li>
+					<li>Light pollution apparent on horizon in almost every direction</li>
+					<li>Clouds are lit across the sky</li>
+					<li>Milky way visible only near zenith</li>
+					<li>M33 (Triangulum galaxy) is invisible</li>
+					<li>Surroundings easily visible</li>
+				</td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td>Brighter suburban area</td>
+				<td>5.0-5.5</td>
+				<td>
+					<li>Very bright Messier objects and globular clusters may still be visible, but without any detail</li>
+					<li>Zodiacal light completely invisible</li>
+					<li>Light pollution apparent on horizon in every direction</li>
+					<li>Clouds are lit across the sky</li>
+					<li>Milky way slightly visible only near zenith</li>
+					<li>M33 (Triangulum galaxy) is invisible</li>
+					<li>Surroundings easily visible</li>
+				</td>
+			</tr>
+			<tr>
+				<td>7</td>
+				<td>Suburban-urban area</td>
+				<td>4.5-5.0</td>
+				<td>
+					<li>Select few Messier objects (M31, M44) may still be visible but without any detail</li>
+					<li>Zodiacal light completely invisible</li>
+					<li>Heavy light pollution apparent on horizon in every direction</li>
+					<li>Clouds are brighly lit across the sky</li>
+					<li>Milky way invisible</li>
+					<li>M33 (Triangulum galaxy) is invisible</li>
+					<li>Surroundings easily visible - you could probably read</li>
+				</td>
+			</tr>
+			<tr>
+				<td>8</td>
+				<td>Urban area</td>
+				<td>4.0-4.5</td>
+				<td>
+					<li>Almost all Messier objects completely invisible</li>
+					<li>Zodiacal light completely invisible</li>
+					<li>Very heavy light pollution apparent on horizon in every direction</li>
+					<li>Clouds are very brightly lit across the sky</li>
+					<li>Milky way completely invisible</li>
+					<li>M33 (Triangulum galaxy) is invisible</li>
+					<li>Surroundings easily visible - you could easily read</li>
+				</td>
+			</tr>
+			<tr>
+				<td>9</td>
+				<td>Inner-city area</td>
+				<td>3.5-4.0</td>
+				<td>
+					<li>No visible Messier objects, aside from Pleiades</li>
+					<li>Zodiacal light completely invisible</li>
+					<li>Sky is brightly lit up to zenith</li>
+					<li>Clouds are very brightly lit across the sky</li>
+					<li>Milky way completely invisible</li>
+					<li>M33 (Triangulum galaxy) is invisible</li>
+					<li>Surroundings easily visible - you could read small print</li>
+					<li>Only objects visible in night sky are the Moon, some of the planets, and a select few stars, such as Vega and Sirius</li>
+				</td>
+			</tr>
+		</table>
+		
+      <!-- Site footer -->
+      <div class="footer">
+        <p>&copy; Ian Palmer, 2014</p>
+      </div>
+
+    </div> <!-- /container -->
+  </body>
+</html>

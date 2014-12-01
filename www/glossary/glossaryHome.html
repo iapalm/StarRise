@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="shortcut icon" href="../../assets/ico/favicon.ico">-->
+
+    <title>Star Rise App</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../css/defaultTheme.css" rel="stylesheet">
+	  
+	  
+    <script src="../js/jquery-2.1.0.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>	 
+	<script src="../js/starUtils.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <!-- Jumbotron -->
+	  <div class="spacer">
+		  <p>
+			  <a class="btn btn-lg btn-success" onclick="history.go(-1);" role="button">Go back</a>
+			  <a class="btn btn-lg btn-success nightButton" role="button" onclick="toggleNightmode(false, 1)" id="nightButton">Night mode</a>
+			  <a class="btn btn-lg btn-success dayButton" role="button" onclick="toggleNightmode(true, 1)" id="dayButton">Day mode</a>
+		  </p>
+	  </div>
+      <div class="jumbotron">
+        <h1>Glossary</h1>
+        <p class="lead">Tap on one of the topics below to find info, pictures, and more about it!</p> 
+      </div>
+		
+		<div class="row">
+			<div class="col-lg-4">
+				<h2>Units of time</h2>
+				<p>How do we measure time in relation to the stars?</p>
+				<p><a class="btn btn-primary" href="time/timeHome.html" role="button">Units of time &raquo;</a></p>
+			</div>
+			<div class="col-lg-4">
+				<h2>Magnitudes and spectrums</h2>
+				<p>Ever wonder why some stars are brighter than others?</p>
+				<p><a class="btn btn-primary" href="mag/magHome.html" role="button">Magnitudes &raquo;</a></p>
+			</div>
+			<div class="col-lg-4">
+				<h2>Properties of stars</h2>
+				<p>What makes a star different from another?</p>
+				<p><a class="btn btn-primary" href="prop/propHome.html" role="button">Properties &raquo;</a></p>
+			</div>
+			<div class="col-lg-4">
+				<h2>Miscellaneous</h2>
+				<p>Where can I learn more?</p>
+				<p><a class="btn btn-primary" href="misc/miscHome.html" role="button">Miscellaneous &raquo;</a></p>
+			</div>
+		</div>
+		
+      <!-- Site footer -->
+      <div class="footer">
+        <p>&copy; Ian Palmer, 2014</p>
+      </div>
+
+    </div> <!-- /container -->
+  </body>
+</html>

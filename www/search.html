@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<!--<link rel="shortcut icon" href="../../assets/ico/favicon.ico">-->
+
+<title>Star Rise App</title>
+
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/defaultTheme.css" rel="stylesheet">
+<!--	<link href="css/bootstrap-theme.min.css" rel="stylesheet">-->
+
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<script src="js/jquery-2.1.0.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/starUtils.js"></script>
+</head>
+
+<body>
+	<div class="container">
+
+		<!-- Jumbotron -->
+		<div class="spacer">
+			<p>
+				<a class="btn btn-lg btn-success" onclick="history.go(-1);"
+					role="button">Go back</a> <a
+					class="btn btn-lg btn-success nightButton" role="button"
+					onclick="toggleNightmode(false)" id="nightButton">Night mode</a> <a
+					class="btn btn-lg btn-success dayButton" role="button"
+					onclick="toggleNightmode(true)" id="dayButton">Day mode</a>
+			</p>
+		</div>
+		<div class="jumbotron">
+			<h1>Search for a star</h1>
+			<p class="lead">You can search by the star's ID in the Henry
+				Draper catalog, ID in the Harvard Revised/Yale Bright Star Catalog,
+				ID in the third edition of the Gliese Catalog of Nearby Stars,
+				proper name, right ascension, declination, distance to Earth (in
+				parsecs), magnitude, absolute magnitude, or spectrum.</p>
+
+		</div>
+
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="input-group">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-default dropdown-toggle"
+							data-toggle="dropdown" id="searchBox">
+							Select search type...<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#" onclick="updateSearchText(1);">Proper
+									Name</a></li>
+							<li><a href="#" onclick="updateSearchText(13);">Messier
+									Object</a></li>
+							<li class="divider"></li>
+							<li><a href="#" onclick="updateSearchText(11);">HYG
+									Database ID</a></li>
+							<li><a href="#" onclick="updateSearchText(2);">Henry
+									Draper ID</a></li>
+							<li><a href="#" onclick="updateSearchText(3);">Harvard
+									Revised/Yale Bright Star ID</a></li>
+							<li><a href="#" onclick="updateSearchText(4);">Gliese ID</a></li>
+							<li class="divider"></li>
+							<li><a href="#" onclick="updateSearchText(5);">Right
+									Ascension</a></li>
+							<li><a href="#" onclick="updateSearchText(6);">Declination</a></li>
+							<li><a href="#" onclick="updateSearchText(7);">Distance</a></li>
+							<li class="divider"></li>
+							<li><a href="#" onclick="updateSearchText(8);">Magnitude</a></li>
+							<li><a href="#" onclick="updateSearchText(9);">Absolute
+									Magnitude</a></li>
+							<li><a href="#" onclick="updateSearchText(10);">Spectrum</a></li>
+							<li class="divider"></li>
+							<li><a href="#" onclick="updateSearchText(12);">Random
+									star!</a></li>
+						</ul>
+					</div>
+					<!-- /btn-group -->
+					<input type="text" id="searchTerm" class="form-control"> <span
+						class="input-group-btn">
+						<button class="btn btn-default" type="button" onclick="search();">Go!</button>
+					</span>
+				</div>
+				<!-- /input-group -->
+			</div>
+			<!-- /.col-lg-6 -->
+		</div>
+		<br>
+		<p id="tableLabel"></p>
+		<div class="table-responsive">
+			<table class="table table-striped" id="resultsTable">
+			</table>
+		</div>
+
+		<script type="text/javascript">
+			function updateSearchText(searchType) {
+				//				alert(searchType);
+				setSearchType(searchType);
+				switch (searchType) {
+				case 1:
+					$("#searchBox").html(
+							'Proper Name <span class="caret"></span>');
+					break;
+				case 2:
+					$("#searchBox").html(
+							'Henry Draper ID <span class="caret"></span>');
+					break;
+				case 3:
+					$("#searchBox")
+							.html(
+									'Harvard Revised/Yale Bright Star ID <span class="caret"></span>');
+					break;
+				case 4:
+					$("#searchBox").html(
+							'Gliese ID <span class="caret"></span>');
+					break;
+				case 5:
+					$("#searchBox").html(
+							'Right Ascension <span class="caret"></span>');
+					break;
+				case 6:
+					$("#searchBox").html(
+							'Declination <span class="caret"></span>');
+					break;
+				case 7:
+					$("#searchBox")
+							.html('Distance <span class="caret"></span>');
+					break;
+				case 8:
+					$("#searchBox").html(
+							'Magnitude <span class="caret"></span>');
+					break;
+				case 9:
+					$("#searchBox").html(
+							'Absolute Magnitude <span class="caret"></span>');
+					break;
+				case 10:
+					$("#searchBox")
+							.html('Spectrum <span class="caret"></span>');
+					break;
+				case 11:
+					$("#searchBox").html(
+							'HYG Database ID <span class="caret"></span>');
+					break;
+				case 12:
+					$("#searchBox").html(
+							'Random star! <span class="caret"></span>');
+					break;
+				case 13:
+					$("#searchBox").html(
+							'Messier Object <span class="caret"></span>');
+					break;
+				default:
+					$("#searchBox")
+							.html('Select search type... <span class="caret"></span>');
+				}
+			}
+
+			var searchType = 0;
+			function setSearchType(type) {
+				searchType = type;
+			}
+
+			var searchTerm;
+			function setSearchTerm(term) {
+				searchTerm = term;
+			}
+
+			function getSearchType() {
+				return searchType;
+			}
+
+			function getSearchTerm() {
+				return searchTerm;
+			}
+
+			var resultStars;
+			function setResultStars(stars) {
+				resultStars = stars;
+			}
+
+			function getResultStars() {
+				return resultStars;
+			}
+		</script>
+
+		<script type="text/javascript">
+			function search() {
+				if (getSearchType() != 12) {
+					setSearchTerm($('#searchTerm').val());
+				} else {
+					setSearchTerm(Math.floor(3 + Math.random() * 119613));
+				}
+				var db = window.openDatabase("STARDB", "1.0", "Star List",
+						10000000);
+				db.transaction(searchDatabase, errorCB, successCB);
+			}
+
+			function viewInfo(id) {
+				var resultStars = getResultStars();
+
+				window.localStorage.setItem("viewInfoID", JSON.stringify(resultStars[id]));
+				window.location = "viewInfo.html";
+			}
+
+			// Transaction error callback
+			//
+			function errorCB(err) {
+				console.log("Error processing SQL: " + err.code);
+			}
+
+			// Transaction success callback
+			//
+			function successCB() {
+			}
+
+			function searchDatabase(tx) {
+				//				tx.executeSql('SELECT DISTINCT * FROM STARDB WHERE ProperName LIKE "' + window.localStorage.getItem('searchTerm') + '"', [], querySuccess, errorCB);
+				//				tx.executeSql('SELECT DISTINCT * FROM STARDB WHERE ProperName LIKE "' + window.localStorage.getItem('searchTerm') + '%' + '"', [], querySuccess, errorCB);
+				switch (getSearchType()) {
+				case 1:
+					tx.executeSql(
+							'SELECT DISTINCT * FROM STARDB WHERE ProperName LIKE "'
+									+ getSearchTerm() + '%' + '"', [],
+							querySuccess, errorCB);
+					break;
+				case 2:
+					tx.executeSql(
+							'SELECT DISTINCT * FROM STARDB WHERE HD LIKE "'
+									+ getSearchTerm() + '%' + '"', [],
+							querySuccess, errorCB);
+					break;
+				case 3:
+					tx.executeSql(
+							'SELECT DISTINCT * FROM STARDB WHERE HR LIKE "'
+									+ getSearchTerm() + '%' + '"', [],
+							querySuccess, errorCB);
+					break;
+				case 4:
+					tx.executeSql(
+							'SELECT DISTINCT * FROM STARDB WHERE Gliese LIKE "'
+									+ getSearchTerm() + '%' + '"', [],
+							querySuccess, errorCB);
+					break;
+				case 5:
+					tx.executeSql(
+							'SELECT DISTINCT * FROM STARDB WHERE RA LIKE "'
+									+ getSearchTerm() + '%' + '"', [],
+							querySuccess, errorCB);
+					break;
+				case 6:
+					tx.executeSql(
+							'SELECT DISTINCT * FROM STARDB WHERE Dec LIKE "'
+									+ getSearchTerm() + '%' + '"', [],
+							querySuccess, errorCB);
+					break;
+				case 7:
+					tx.executeSql(
+							'SELECT DISTINCT * FROM STARDB WHERE Distance LIKE "'
+									+ getSearchTerm() + '%' + '"', [],
+							querySuccess, errorCB);
+					break;
+				case 8:
+					tx.executeSql(
+							'SELECT DISTINCT * FROM STARDB WHERE Mag LIKE "'
+									+ getSearchTerm() + '%' + '"', [],
+							querySuccess, errorCB);
+					break;
+				case 9:
+					tx.executeSql(
+							'SELECT DISTINCT * FROM STARDB WHERE AbsMag LIKE "'
+									+ getSearchTerm() + '%' + '"', [],
+							querySuccess, errorCB);
+					break;
+				case 10:
+					tx.executeSql(
+							'SELECT DISTINCT * FROM STARDB WHERE Spectrum LIKE "'
+									+ getSearchTerm() + '%' + '"', [],
+							querySuccess, errorCB);
+					break;
+				case 11:
+					tx.executeSql(
+							'SELECT DISTINCT * FROM STARDB WHERE starID="'
+									+ getSearchTerm() + '"', [], querySuccess,
+							errorCB);
+					break;
+				case 12:
+					tx.executeSql(
+							'SELECT DISTINCT * FROM STARDB WHERE starID LIKE "'
+									+ getSearchTerm() + '%' + '"', [],
+							querySuccess, errorCB);
+					break;
+				case 13:
+					tx.executeSql(
+							'SELECT DISTINCT * FROM STARDB WHERE starID>=119617 AND ProperName LIKE "M'
+									+ getSearchTerm() + '%' + '"', [],
+							querySuccess, errorCB);
+					break;
+				default:
+					alert('Please select a search type!');
+				}
+
+			}
+
+			function querySuccess(tx, results) {
+				var len = results.rows.length;
+				if (len > 1 || len == 0) {
+					$('#tableLabel').text(len + ' entries found');
+				} else {
+					$('#tableLabel').text(len + ' entry found');
+				}
+				if (len != 0) {
+					$('#resultsTable').children().remove();
+					$('#resultsTable')
+							.append(
+									'<thead><tr><td>Object</td><td>HYG Database ID</td><td>Henry Draper ID</td><td>Harvard Revised/Yale Bright Star ID</td><td>Gliese ID</td><td>Right Ascension</td><td>Declination</td><td>Distance</td><td>Magnitude</td><td>Absolute Magnitude</td><td>Spectrum</td></tr></thead>');
+					var resultStars = {};
+					for (var i = 0; i < len; i++) {
+						var name;
+						if (results.rows.item(i).Other != "") {
+							name = results.rows.item(i).ProperName + " ("
+									+ results.rows.item(i).Other + ")";
+						} else if (results.rows.item(i).ProperName != "") {
+							name = results.rows.item(i).ProperName;
+						} else if (results.rows.item(i).HD != "") {
+							name = "HD " + results.rows.item(i).HD;
+						} else if (results.rows.item(i).HR != "") {
+							name = "HR " + results.rows.item(i).HR;
+						} else {
+							starName = "HYG " + results.rows.item(i).starID;
+						}
+						$('#resultsTable')
+								.append(
+										'<thead><tr><td><button type="button" class="btn btn-default btn-xs" onclick="viewInfo('
+												+ results.rows.item(i).starID
+												+ ')">'
+												+ name
+												+ '</button></td><td>'
+												+ results.rows.item(i).starID
+												+ '</td><td>'
+												+ results.rows.item(i).HD
+												+ '</td><td>'
+												+ results.rows.item(i).HR
+												+ '</td><td>'
+												+ results.rows.item(i).Gliese
+												+ '</td><td>'
+												+ results.rows.item(i).RA
+												+ '</td><td>'
+												+ results.rows.item(i).Dec
+												+ '</td><td>'
+												+ results.rows.item(i).Distance
+												+ '</td><td>'
+												+ results.rows.item(i).Mag
+												+ '</td><td>'
+												+ results.rows.item(i).AbsMag
+												+ '</td><td>'
+												+ results.rows.item(i).Spectrum
+												+ '</td></tr></thead>');
+						//						$('#resultsTable').append('<thead><tr><td>' + results.rows.item(i).ProperName + '</td><td>' + results.rows.item(i).starID + '</td><td>' + results.rows.item(i).HD + '</td><td>' + results.rows.item(i).HR + '</td><td>' + results.rows.item(i).Gliese + '</td><td>' + results.rows.item(i).RA + '</td><td>' + results.rows.item(i).Dec + '</td><td>' + results.rows.item(i).Distance + '</td><td>' + results.rows.item(i).Mag + '</td><td>' + results.rows.item(i).AbsMag + '</td><td>' + results.rows.item(i).Spectrum + '</td><td><button type="button" class="btn btn-default btn-xs" onclick="viewInfo(' + results.rows.item(i).starID + ')">View ' + results.rows.item(i).ProperName + ' info</button></td></tr></thead>');
+						resultStars[results.rows.item(i).starID] = results.rows
+								.item(i);
+						//					console.log("Row = " + i + " name = " + results.rows.item(i).ProperName + " RA =  " + results.rows.item(i).RA);
+					}
+
+					setResultStars(resultStars);
+				}
+			}
+		</script>
+
+		<!-- Site footer -->
+		<div class="footer">
+			<p>&copy; Ian Palmer, 2014</p>
+		</div>
+
+	</div>
+	<!-- /container -->
+</body>
+</html>

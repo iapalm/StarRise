@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="shortcut icon" href="../../assets/ico/favicon.ico">-->
+
+    <title>Star Rise App</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../css/defaultTheme.css" rel="stylesheet">
+<!--	<link href="css/bootstrap-theme.min.css" rel="stylesheet">-->
+	  
+	  <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="../../js/jquery-2.1.0.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>	  
+    <script src="../../js/starUtils.js"></script>	  
+  </head>
+
+  <body>
+    <div class="container">
+
+      <!-- Jumbotron -->
+	  <div class="spacer">
+		  <p>
+			  <a class="btn btn-lg btn-success" onclick="history.go(-1);" role="button">Go back</a>
+			  <a class="btn btn-lg btn-success nightButton" role="button" onclick="toggleNightmode(false, 2)" id="nightButton">Night mode</a>
+			  <a class="btn btn-lg btn-success dayButton" role="button" onclick="toggleNightmode(true, 2)" id="dayButton">Day mode</a>
+		  </p>
+	  </div>
+		
+		<div class="row">
+			<div class="col-lg-4">
+				<h2>Bortle scale</h2>
+				<p>The Bortle scale measures night sky brightness</p>
+				<p><a class="btn btn-primary" href="bortle.html" role="button">Learn more &raquo;</a></p>
+			</div>
+		</div>
+		
+      <!-- Site footer -->
+      <div class="footer">
+        <p>&copy; Ian Palmer, 2014</p>
+      </div>
+
+    </div> <!-- /container -->
+  </body>
+</html>

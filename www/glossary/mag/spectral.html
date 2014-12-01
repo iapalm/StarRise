@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="shortcut icon" href="../../assets/ico/favicon.ico">-->
+
+    <title>Star Rise App</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../css/defaultTheme.css" rel="stylesheet">
+<!--	<link href="css/bootstrap-theme.min.css" rel="stylesheet">-->
+	  
+	  <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="../../js/jquery-2.1.0.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+	<script src="../../js/starUtils.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <!-- Jumbotron -->
+	  <div class="spacer">
+		  <p>
+			  <a class="btn btn-lg btn-success" onclick="history.go(-1);" role="button">Go back</a>
+			  <a class="btn btn-lg btn-success nightButton" role="button" onclick="toggleNightmode(false, 2)" id="nightButton">Night mode</a>
+			  <a class="btn btn-lg btn-success dayButton" role="button" onclick="toggleNightmode(true, 2)" id="dayButton">Day mode</a>
+		  </p>
+	  </div>
+      <div class="jumbotron">
+        <h1>Spectral classification</h1> 
+      </div>
+		
+		<p>Spectral classification is simply the categorization of stars based on the light emitted from the star.  The Morgan-Keenan system (MKK) is the most widespread nomenclature system today.  This system uses the letters O, B, A, F, G, K, M, L, T, and Y to denote the temperature from coolest to warmest, respectively.  Each class is subdivided into 10 categories, with 0 being the coolest and 9 being the warmest, so B6 < B9 < A0 in temperature.  The MKK system also measures luminosity using Roman numerals.  The measure of luminosity is based off of the width of the spectral lines of the star.  O denotes hypergiants, I denotes supergiants, II denotes bright giants, class III denotes normal giants, class IV denotes sub-giants, class V denotes main sequence stars, class VI denotes sub-dwarfs, VII denotes white dwarfs, and VIII denotes brown dwarfs, the dimmest of the stars.</p>
+		<br>
+		
+		<img src="spectrum.png" alt="Spectrum chart" width="100%" height="100%">
+		<p>"<a href="https://commons.wikimedia.org/wiki/File:HR-diag-no-text.svg#mediaviewer/File:HR-diag-no-text.svg">HR-diag-no-text</a>" by <a href="//commons.wikimedia.org/wiki/User:Rursus" title="User:Rursus">User:Rursus</a> - <span class="int-own-work">Own work</span>. Licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a> via <a href="//commons.wikimedia.org/wiki/">Wikimedia Commons</a>.</p>
+		
+      <!-- Site footer -->
+      <div class="footer">
+        <p>&copy; Ian Palmer, 2014</p>
+      </div>
+
+    </div> <!-- /container -->
+  </body>
+</html>
